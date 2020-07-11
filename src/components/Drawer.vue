@@ -1,13 +1,12 @@
 <template>
-  <aside id="drawer">
+  <div id="drawer">
     <div>Top posts</div>
     <div>scroller</div>
     <div>Dismiss All</div>
-  </aside>
+  </div>
 </template>
 
 <script>
-
 export default {
   name: 'Drawer'
 }
@@ -17,8 +16,7 @@ export default {
 #drawer {
   background-color: #212121;
   color: white;
-  max-width: 30vw;
-  min-width: 300px;
   padding: 16px;
+  height: 100%;
 }
 </style>

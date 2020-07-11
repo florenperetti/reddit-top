@@ -1,7 +1,7 @@
 <template>
-  <main id="main">
+  <div id="main">
     selected post data
-  </main>
+  </div>
 </template>
 
 <script>

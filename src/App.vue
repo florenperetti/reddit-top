@@ -1,8 +1,17 @@
 <template>
-  <div id="app">
-    <Drawer />
-    <MainPost />
-  </div>
+  <vue-drawer-layout
+    id="app"
+    ref="drawer"
+    :drawer-width="300"
+    :backdrop="false"
+  >
+    <aside class="drawer-content" slot="drawer">
+      <Drawer />
+    </aside>
+    <main slot="content">
+      <MainPost />
+    </main>
+  </vue-drawer-layout>
 </template>
 
 <script>
@@ -37,8 +46,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  display: flex;
-  width: 100%;
   height: 100vh;
+
+  .drawer-content {
+    height: 100vh;
+  }
 }
 </style>

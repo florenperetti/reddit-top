@@ -46,6 +46,7 @@ export default {
     text-align: center;
     padding: 8px;
     flex-grow: 0;
+    flex-shrink: 0;
   }
 
   &__dismiss-button {

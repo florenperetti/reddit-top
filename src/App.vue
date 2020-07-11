@@ -9,6 +9,7 @@
       <Drawer
         :posts="posts"
         @dismiss-post="dismissPost"
+        @dismiss-all="dismissAllPosts"
       />
     </aside>
     <main slot="content">
@@ -28,12 +29,6 @@ export default {
     Drawer,
     MainPost
   },
-  methods: {
-    ...mapActions({
-      fetchPosts: 'posts/fetchPosts',
-      dismissPost: 'posts/dismissPost'
-    })
-  },
   computed: {
     ...mapGetters({
       posts: 'posts/getPostsToShow'
@@ -41,11 +36,21 @@ export default {
   },
   created () {
     this.fetchPosts()
+  },
+  methods: {
+    ...mapActions({
+      fetchPosts: 'posts/fetchPosts',
+      dismissPost: 'posts/dismissPost',
+      dismissAllPosts: 'posts/dismissAllPosts'
+    })
   }
 }
 </script>
 
 <style lang="scss">
+* {
+  box-sizing: border-box;
+}
 body {
   margin: 0;
 }

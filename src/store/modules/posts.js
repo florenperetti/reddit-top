@@ -32,6 +32,9 @@ const actions = {
   },
   dismissPost ({ commit }, name) {
     commit('SET_DISSMISSED_POST', name)
+  },
+  dismissAllPosts ({ commit }) {
+    commit('DISSMISS_ALL_POSTS')
   }
 }
 
@@ -41,6 +44,15 @@ const mutations = {
   },
   SET_DISSMISSED_POST (state, postName) {
     Vue.set(state.dismissed, postName, true)
+  },
+  DISSMISS_ALL_POSTS (state) {
+    state.dismissed = {
+      ...state.dismissed,
+      ...state.all.reduce((acc, post) => {
+        acc[post.data.name] = true
+        return acc
+      }, {})
+    }
   }
 }
 

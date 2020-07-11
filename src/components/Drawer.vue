@@ -1,14 +1,15 @@
 <template>
   <div class="drawer">
     <div class="drawer__header">Top posts</div>
-    <div class="drawer__scroller">
+    <transition-group name="list" tag="div" class="drawer__scroller">
       <Post
         v-for="post in posts"
-        :key="post.name"
+        class="list-item"
+        :key="post.data.name"
         :post="post.data"
         @dismiss-post="$emit('dismiss-post', $event)"
       />
-    </div>
+    </transition-group>
     <div class="drawer__footer">
       <button @click="$emit('dismiss-all')" class="drawer__dismiss-button">Dismiss All</button>
     </div>
@@ -57,5 +58,15 @@ export default {
     flex-grow: 1;
     overflow-y: auto;
   }
+}
+
+.list-enter-active,
+.list-leave-active {
+  transition: all .5s;
+}
+.list-enter,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(-100%);
 }
 </style>

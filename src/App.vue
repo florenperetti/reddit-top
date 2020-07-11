@@ -6,7 +6,7 @@
     :backdrop="false"
   >
     <aside class="drawer-content" slot="drawer">
-      <Drawer />
+      <Drawer :posts="posts" />
     </aside>
     <main slot="content">
       <MainPost />
@@ -15,9 +15,9 @@
 </template>
 
 <script>
-import { fetchTopPosts } from './api/redditApi.js'
 import Drawer from './components/Drawer'
 import MainPost from './components/MainPost'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'App',
@@ -25,14 +25,18 @@ export default {
     Drawer,
     MainPost
   },
-  data () {
-    return {
-      posts: []
-    }
+  methods: {
+    ...mapActions({
+      fetchPosts: 'posts/fetchPosts'
+    })
   },
-  async created () {
-    const response = await fetchTopPosts()
-    this.post = response.data.children
+  computed: {
+    ...mapGetters({
+      posts: 'posts/getPostsToShow'
+    })
+  },
+  created () {
+    this.fetchPosts()
   }
 }
 </script>

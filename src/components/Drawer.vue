@@ -1,14 +1,21 @@
 <template>
   <div id="drawer">
     <div>Top posts</div>
-    <div>scroller</div>
+    <div>
+
+    </div>
     <div>Dismiss All</div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Drawer'
+  name: 'Drawer',
+  props: {
+    posts: {
+      type: Array
+    }
+  }
 }
 </script>
 

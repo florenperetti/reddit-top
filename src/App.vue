@@ -16,8 +16,14 @@ export default {
     Drawer,
     MainPost
   },
+  data () {
+    return {
+      posts: []
+    }
+  },
   async created () {
-    console.log(await fetchTopPosts())
+    const response = await fetchTopPosts()
+    this.post = response.data.children
   }
 }
 </script>

@@ -3,7 +3,7 @@
     <div class="post__header">
       <span class="post__icon-read"></span>
       <h2 class="post__author">{{ post.author }}</h2>
-      <span class="post__date">{{ post.created }}</span>
+      <span class="post__date">{{ postDate }}</span>
     </div>
     <div class="post__content">
       <img
@@ -23,12 +23,19 @@
 </template>
 
 <script>
+import { humanize } from '../utils'
+
 export default {
   name: 'Post',
   props: {
     post: {
       type: Object,
       required: true
+    }
+  },
+  computed: {
+    postDate () {
+      return humanize(this.post.created_utc)
     }
   }
 }
@@ -56,6 +63,10 @@ export default {
     font-weight: 400;
     font-size: 1rem;
     margin: 0;
+  }
+
+  &__title {
+    margin-right: auto;
   }
 
   &__author {

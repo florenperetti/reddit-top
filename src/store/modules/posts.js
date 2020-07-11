@@ -1,4 +1,5 @@
 import { fetchTopPosts } from '../../api/redditApi'
+import Vue from 'vue'
 
 const state = {
   after: null,
@@ -9,7 +10,14 @@ const state = {
 
 const getters = {
   getPostsToShow: (state, getters, rootState) => {
-    return state.all // TODO set watched and remove dismissed
+    return state.all.reduce((acc, curr) => {
+      if (state.dismissed[curr.data.name]) {
+        return acc
+      }
+      // TODO set watched
+      acc.push(curr)
+      return acc
+    }, [])
   }
 }
 
@@ -21,12 +29,18 @@ const actions = {
     } catch (error) {
       console.error(error)
     }
+  },
+  dismissPost ({ commit }, name) {
+    commit('SET_DISSMISSED_POST', name)
   }
 }
 
 const mutations = {
   SET_ALL_POSTS (state, posts) {
     state.all = posts
+  },
+  SET_DISSMISSED_POST (state, postName) {
+    Vue.set(state.dismissed, postName, true)
   }
 }
 

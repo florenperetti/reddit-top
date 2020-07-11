@@ -6,7 +6,10 @@
     :backdrop="false"
   >
     <aside class="drawer-content" slot="drawer">
-      <Drawer :posts="posts" />
+      <Drawer
+        :posts="posts"
+        @dismiss-post="dismissPost"
+      />
     </aside>
     <main slot="content">
       <MainPost />
@@ -27,7 +30,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchPosts: 'posts/fetchPosts'
+      fetchPosts: 'posts/fetchPosts',
+      dismissPost: 'posts/dismissPost'
     })
   },
   computed: {

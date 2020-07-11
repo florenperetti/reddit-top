@@ -2,10 +2,15 @@
   <div class="drawer">
     <div class="drawer__header">Top posts</div>
     <div class="drawer__scroller">
-      <Post v-for="post in posts" :key="post.name" :post="post.data" />
+      <Post
+        v-for="post in posts"
+        :key="post.name"
+        :post="post.data"
+        @dismiss-post="$emit('dismiss-post', $event)"
+      />
     </div>
     <div class="drawer__footer">
-      <button class="drawer__dismiss-button">Dismiss All</button>
+      <button @click="$emit('dismiss-all')" class="drawer__dismiss-button">Dismiss All</button>
     </div>
   </div>
 </template>

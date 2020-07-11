@@ -15,7 +15,7 @@
         <h3 class="post__title">{{post.title}}</h3>
       </div>
       <div class="post__footer">
-        <button class="post__dismiss-button">
+        <button @click="$emit('dismiss-post', post.name)" class="post__dismiss-button">
           <span class="post__icon-dismiss">&times;</span>
           Dismiss Post</button>
         <span class="post__comments">{{ post.num_comments }} comments</span>

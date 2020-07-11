@@ -2,7 +2,7 @@
   <vue-drawer-layout
     id="app"
     ref="drawer"
-    :drawer-width="300"
+    :drawer-width="350"
     :backdrop="false"
   >
     <aside class="drawer-content" slot="drawer">

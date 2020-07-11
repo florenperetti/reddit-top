@@ -5,23 +5,29 @@ export const humanize = timestamp => {
   const hour = minute * 60
   const day = hour * 24
 
-  let result
-
   if (delta < 30) {
-    result = 'just then.'
-  } else if (delta < minute) {
-    result = delta + ' seconds ago.'
-  } else if (delta < 2 * minute) {
-    result = 'a minute ago.'
-  } else if (delta < hour) {
-    result = Math.floor(delta / minute) + ' minutes ago.'
-  } else if (Math.floor(delta / hour) === 1) {
-    result = '1 hour ago.'
-  } else if (delta < day) {
-    result = Math.floor(delta / hour) + ' hours ago.'
-  } else if (delta < day * 2) {
-    result = 'yesterday'
+    return 'just now'
   }
-
-  return result
+  if (delta < minute) {
+    return delta + ' seconds ago'
+  }
+  if (delta < 2 * minute) {
+    return 'a minute ago'
+  }
+  if (delta < hour) {
+    return Math.floor(delta / minute) + ' minutes ago'
+  }
+  if (Math.floor(delta / hour) === 1) {
+    return '1 hour ago'
+  }
+  if (delta < day) {
+    return Math.floor(delta / hour) + ' hours ago'
+  }
+  if (delta < day * 2) {
+    return 'yesterday'
+  }
+  if (delta < day * 7) {
+    return Math.floor(delta / day) + 'days ago'
+  }
+  return 'more than a week ago'
 }

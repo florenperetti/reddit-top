@@ -4,7 +4,9 @@
     <div class="drawer__scroller">
       <Post v-for="post in posts" :key="post.name" :post="post.data" />
     </div>
-    <div class="drawer__footer">Dismiss All</div>
+    <div class="drawer__footer">
+      <button class="drawer__dismiss-button">Dismiss All</button>
+    </div>
   </div>
 </template>
 
@@ -33,11 +35,16 @@ export default {
   height: 100%;
 
   &__header,
-  &__footer {
-    height: 26px;
+  &__dismiss-button {
+    height: 32px;
     text-align: center;
     padding: 8px;
     flex-grow: 0;
+  }
+
+  &__dismiss-button {
+    display: block;
+    width: 100%;
   }
 
   &__scroller {

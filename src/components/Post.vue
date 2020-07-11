@@ -43,7 +43,7 @@ export default {
 
 <style lang="scss">
 .post {
-  padding: 16px;
+  padding: 10px;
 
   + .post {
     border-top: 1px solid #ccc;
@@ -55,7 +55,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 8px;
+    padding: 6px;
   }
 
   &__author,
@@ -71,7 +71,8 @@ export default {
 
   &__author {
     font-size: 1.2rem;
-    width: 70%;
+    width: 60%;
+    margin-right: auto;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -111,7 +112,7 @@ export default {
     color: orange;
     height: 16px;
     width: 16px;
-    font-size: 22px;
+    font-size: 20px;
     border-radius: 50%;
     border: 1px solid orange;
     display: inline-flex;

@@ -2,19 +2,24 @@
   <div class="drawer">
     <div class="drawer__header">Top posts</div>
     <div class="drawer__scroller">
-
+      <Post v-for="post in posts" :key="post.name" :post="post.data" />
     </div>
     <div class="drawer__footer">Dismiss All</div>
   </div>
 </template>
 
 <script>
+import Post from './Post'
+
 export default {
   name: 'Drawer',
   props: {
     posts: {
       type: Array
     }
+  },
+  components: {
+    Post
   }
 }
 </script>
@@ -36,6 +41,7 @@ export default {
   }
 
   &__scroller {
+    background-color: #111111;
     flex-grow: 1;
     overflow-y: auto;
   }

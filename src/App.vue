@@ -4,10 +4,14 @@
 </template>
 
 <script>
+import { fetchTopPosts } from './api/redditApi.js'
 
 export default {
   name: 'App',
   components: {
+  },
+  async created () {
+    console.log(await fetchTopPosts())
   }
 }
 </script>

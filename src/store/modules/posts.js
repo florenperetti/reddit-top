@@ -25,10 +25,17 @@ const getters = {
 }
 
 const actions = {
-  async fetchPosts ({ commit }) {
+  async fetchPosts ({ commit, state }, paginated) {
     try {
-      const response = await fetchTopPosts()
-      commit('SET_ALL_POSTS', response.data.children.map(item => {
+      let params
+      if (paginated) {
+        params = {
+          after: state.after,
+          limit: 10
+        }
+      }
+      const response = await fetchTopPosts(params)
+      const posts = response.data.children.map(item => {
         // eslint-disable-next-line camelcase
         const { title, thumbnail, author, name, num_comments, created_utc, preview } = item.data
         let image = ''
@@ -47,7 +54,15 @@ const actions = {
           created_utc,
           read: false
         }
-      }))
+      })
+      if (paginated) {
+        commit('APPEND_POSTS', posts)
+      } else {
+        commit('SET_ALL_POSTS', posts)
+      }
+      if (posts.length > 0) {
+        commit('SET_AFTER', posts[posts.length - 1].name)
+      }
     } catch (error) {
       console.error(error)
     }
@@ -68,6 +83,9 @@ const mutations = {
   SET_ALL_POSTS (state, posts) {
     state.all = posts
   },
+  APPEND_POSTS (state, posts) {
+    state.all = [...state.all, ...posts]
+  },
   SET_DISSMISSED_POST (state, postName) {
     Vue.set(state.dismissed, postName, true)
   },
@@ -85,6 +103,9 @@ const mutations = {
   },
   SET_READ_POST (state, postName) {
     Vue.set(state.watched, postName, true)
+  },
+  SET_AFTER (state, postName) {
+    state.after = postName
   }
 }
 

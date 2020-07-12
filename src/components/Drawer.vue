@@ -45,6 +45,7 @@ export default {
     ...mapActions({
       dismissPost: 'posts/dismissPost',
       dismissAllPosts: 'posts/dismissAllPosts',
+      fetchPosts: 'posts/fetchPosts',
       viewPost: 'posts/viewPost'
     }),
     handleDismissPost (name) {
@@ -60,7 +61,7 @@ export default {
       this.viewPost(post)
     },
     handleScrollEnd () {
-      alert('reached bottom')
+      this.fetchPosts(true)
     }
   }
 }

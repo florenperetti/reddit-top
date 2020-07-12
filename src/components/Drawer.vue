@@ -7,8 +7,8 @@
         class="list-item"
         :key="post.name"
         :post="post"
-        @dismiss-post="dismissPost"
-        @view-post="viewPost"
+        @dismiss-post="handleDismissPost"
+        @view-post="handleViewPost"
       />
     </transition-group>
     <div class="drawer__footer">
@@ -26,6 +26,12 @@ export default {
   components: {
     Post
   },
+  props: {
+    preventPostClick: {
+      type: Boolean,
+      default: false
+    }
+  },
   computed: {
     ...mapGetters({
       posts: 'posts/getPostsToShow'
@@ -36,7 +42,19 @@ export default {
       dismissPost: 'posts/dismissPost',
       dismissAllPosts: 'posts/dismissAllPosts',
       viewPost: 'posts/viewPost'
-    })
+    }),
+    handleDismissPost (name) {
+      if (this.preventPostClick) {
+        return
+      }
+      this.dismissPost(name)
+    },
+    handleViewPost (post) {
+      if (this.preventPostClick) {
+        return
+      }
+      this.viewPost(post)
+    }
   }
 }
 </script>

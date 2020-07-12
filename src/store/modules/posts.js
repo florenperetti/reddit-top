@@ -21,11 +21,14 @@ const getters = {
       acc.push(curr)
       return acc
     }, [])
+  },
+  getPostsToShowCount: (state, getters) => {
+    return getters.getPostsToShow.length
   }
 }
 
 const actions = {
-  async fetchPosts ({ commit, state }, paginated) {
+  async fetchPosts ({ commit, state, dispatch }, paginated) {
     try {
       let params
       if (paginated) {
@@ -35,16 +38,21 @@ const actions = {
         }
       }
       const response = await fetchTopPosts(params)
-      const posts = response.data.children.map(item => {
+      const posts = response.data.children.reduce((acc, item) => {
         // eslint-disable-next-line camelcase
         const { title, thumbnail, author, name, num_comments, created_utc, preview } = item.data
+
+        if (state.dismissed[name]) {
+          return acc
+        }
+
         let image = ''
 
         if (preview && preview.images && preview.images[0]) {
           image = preview.images[0].source.url.replace(ampRegexp, '&')
         }
 
-        return {
+        acc.push({
           title,
           thumbnail,
           image,
@@ -53,8 +61,9 @@ const actions = {
           num_comments,
           created_utc,
           read: false
-        }
-      })
+        })
+        return acc
+      }, [])
       if (paginated) {
         commit('APPEND_POSTS', posts)
       } else {
@@ -62,6 +71,8 @@ const actions = {
       }
       if (posts.length > 0) {
         commit('SET_AFTER', posts[posts.length - 1].name)
+      } else {
+        dispatch('fetchPosts', true)
       }
     } catch (error) {
       console.error(error)

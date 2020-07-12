@@ -1,7 +1,7 @@
 <template>
   <div class="drawer">
     <div class="drawer__header">Top posts</div>
-    <InifiniteScroll class="drawer__scroller" @scroll-end="handleScrollEnd">
+    <InifiniteScroll ref="scroller" class="drawer__scroller" @scroll-end="handleScrollEnd">
       <transition-group name="list" tag="div" class="drawer__scroller-inner">
         <Post
           v-for="post in posts"
@@ -14,7 +14,7 @@
       </transition-group>
     </InifiniteScroll>
     <div class="drawer__footer">
-      <button @click="dismissAllPosts" class="drawer__dismiss-button">Dismiss All</button>
+      <button @click="handleDismissAllPosts" class="drawer__dismiss-button">Dismiss All</button>
     </div>
   </div>
 </template>
@@ -48,6 +48,11 @@ export default {
       fetchPosts: 'posts/fetchPosts',
       viewPost: 'posts/viewPost'
     }),
+    handleDismissAllPosts () {
+      this.$refs.scroller.$el.scrollTop = 0
+      this.dismissAllPosts()
+      this.handleScrollEnd()
+    },
     handleDismissPost (name) {
       if (this.preventPostClick) {
         return

@@ -78,10 +78,14 @@ const actions = {
       console.error(error)
     }
   },
-  dismissPost ({ commit }, name) {
+  dismissPost ({ commit, state }, name) {
+    if (state.current && state.current.name === name) {
+      commit('SET_CURRENT_POST', null)
+    }
     commit('SET_DISSMISSED_POST', name)
   },
   dismissAllPosts ({ commit }) {
+    commit('SET_CURRENT_POST', null)
     commit('DISSMISS_ALL_POSTS')
   },
   viewPost ({ commit }, post) {

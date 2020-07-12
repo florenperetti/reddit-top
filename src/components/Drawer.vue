@@ -1,16 +1,18 @@
 <template>
   <div class="drawer">
     <div class="drawer__header">Top posts</div>
-    <transition-group name="list" tag="div" class="drawer__scroller">
-      <Post
-        v-for="post in posts"
-        class="list-item"
-        :key="post.name"
-        :post="post"
-        @dismiss-post="handleDismissPost"
-        @view-post="handleViewPost"
-      />
-    </transition-group>
+    <InifiniteScroll class="drawer__scroller" @scroll-end="handleScrollEnd">
+      <transition-group name="list" tag="div" class="drawer__scroller-inner">
+        <Post
+          v-for="post in posts"
+          class="list-item"
+          :key="post.name"
+          :post="post"
+          @dismiss-post="handleDismissPost"
+          @view-post="handleViewPost"
+        />
+      </transition-group>
+    </InifiniteScroll>
     <div class="drawer__footer">
       <button @click="dismissAllPosts" class="drawer__dismiss-button">Dismiss All</button>
     </div>
@@ -20,11 +22,13 @@
 <script>
 import Post from './Post'
 import { mapActions, mapGetters } from 'vuex'
+import InifiniteScroll from './InifiniteScroll'
 
 export default {
   name: 'Drawer',
   components: {
-    Post
+    Post,
+    InifiniteScroll
   },
   props: {
     preventPostClick: {
@@ -54,6 +58,9 @@ export default {
         return
       }
       this.viewPost(post)
+    },
+    handleScrollEnd () {
+      alert('reached bottom')
     }
   }
 }
@@ -81,10 +88,13 @@ export default {
     width: 100%;
   }
 
-  &__scroller {
+  .drawer__scroller {
     background-color: #111111;
     flex-grow: 1;
     overflow-y: auto;
+  }
+  .drawer__scroller--inner {
+    flex-grow: 1;
   }
 }
 

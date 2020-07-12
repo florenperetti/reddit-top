@@ -70,16 +70,15 @@ export default {
   }
 
   &__icon-read {
-    height: 6px;
-    width: 6px;
+    height: 8px;
+    width: 8px;
     background-color: rgb(117, 115, 243);
-    border: 2px solid rgb(117, 115, 243);
     border-radius: 50%;
     display: inline-block;
     margin-right: 8px;
 
     &--unread {
-      background-color: transparent !important;
+      visibility: hidden;
     }
   }
 

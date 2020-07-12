@@ -1,10 +1,13 @@
 <template>
   <div id="main">
-    selected post data
+    <h1>{{currentPost.author}}</h1>
+    <img v-if="currentPost.thumbnail" :src="currentPost.thumbnail">
+    <h3>{{currentPost.title}}</h3>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 
 export default {
   name: 'MainPost',
@@ -12,6 +15,11 @@ export default {
     post: {
       type: Object
     }
+  },
+  computed: {
+    ...mapState({
+      currentPost: state => state.posts.current
+    })
   }
 }
 </script>

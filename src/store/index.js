@@ -9,5 +9,14 @@ export default new Vuex.Store({
   modules: {
     posts
   },
-  plugins: [createPersistedState()]
+  plugins: [createPersistedState(
+    {
+      reducer: state => {
+        const { current, ...rest } = state.posts
+        return {
+          posts: rest
+        }
+      }
+    }
+  )]
 })

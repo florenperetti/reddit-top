@@ -8,6 +8,7 @@
         :key="post.data.name"
         :post="post.data"
         @dismiss-post="$emit('dismiss-post', $event)"
+        @view-post="$emit('view-post', $event)"
       />
     </transition-group>
     <div class="drawer__footer">

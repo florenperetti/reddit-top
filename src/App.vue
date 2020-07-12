@@ -10,6 +10,7 @@
         :posts="posts"
         @dismiss-post="dismissPost"
         @dismiss-all="dismissAllPosts"
+        @view-post="viewPost"
       />
     </aside>
     <main slot="content">
@@ -42,7 +43,9 @@ export default {
       fetchPosts: 'posts/fetchPosts',
       dismissPost: 'posts/dismissPost',
       dismissAllPosts: 'posts/dismissAllPosts'
-    })
+    }),
+    viewPost (name) {
+    }
   }
 }
 </script>

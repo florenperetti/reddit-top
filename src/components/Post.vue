@@ -1,5 +1,5 @@
 <template>
-  <article class="post">
+  <article @click="$emit('view-post', post.name)" class="post">
     <div class="post__content-wrapper">
       <div class="post__header">
         <span class="post__icon-read"></span>

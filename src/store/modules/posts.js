@@ -3,6 +3,7 @@ import Vue from 'vue'
 
 const state = {
   after: null,
+  current: null,
   all: [],
   watched: {},
   dismissed: {}

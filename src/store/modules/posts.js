@@ -12,10 +12,10 @@ const state = {
 const getters = {
   getPostsToShow: (state, getters, rootState) => {
     return state.all.reduce((acc, curr) => {
-      if (state.dismissed[curr.data.name]) {
+      if (state.dismissed[curr.name]) {
         return acc
       }
-      curr.data.read = !!state.watched[curr.data.name]
+      curr.read = !!state.watched[curr.name]
       acc.push(curr)
       return acc
     }, [])
@@ -26,7 +26,19 @@ const actions = {
   async fetchPosts ({ commit }) {
     try {
       const response = await fetchTopPosts()
-      commit('SET_ALL_POSTS', response.data.children)
+      commit('SET_ALL_POSTS', response.data.children.map(item => {
+        // eslint-disable-next-line camelcase
+        const { title, thumbnail, author, name, num_comments, created_utc } = item.data
+        return {
+          title,
+          thumbnail,
+          author,
+          name,
+          num_comments,
+          created_utc,
+          read: false
+        }
+      }))
     } catch (error) {
       console.error(error)
     }
@@ -54,7 +66,7 @@ const mutations = {
     state.dismissed = {
       ...state.dismissed,
       ...state.all.reduce((acc, post) => {
-        acc[post.data.name] = true
+        acc[post.name] = true
         return acc
       }, {})
     }

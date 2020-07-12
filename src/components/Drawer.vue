@@ -5,8 +5,8 @@
       <Post
         v-for="post in posts"
         class="list-item"
-        :key="post.data.name"
-        :post="post.data"
+        :key="post.name"
+        :post="post"
         @dismiss-post="dismissPost"
         @view-post="viewPost"
       />

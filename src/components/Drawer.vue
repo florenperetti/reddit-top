@@ -34,10 +34,9 @@ export default {
   methods: {
     ...mapActions({
       dismissPost: 'posts/dismissPost',
-      dismissAllPosts: 'posts/dismissAllPosts'
-    }),
-    viewPost (name) {
-    }
+      dismissAllPosts: 'posts/dismissAllPosts',
+      viewPost: 'posts/viewPost'
+    })
   }
 }
 </script>

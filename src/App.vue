@@ -6,8 +6,7 @@
     :backdrop="false"
   >
     <aside class="drawer-content" slot="drawer">
-      <Drawer
-      />
+      <Drawer />
     </aside>
     <main slot="content">
       <MainPost />

@@ -15,7 +15,7 @@ const getters = {
       if (state.dismissed[curr.data.name]) {
         return acc
       }
-      // TODO set watched
+      curr.data.read = !!state.watched[curr.data.name]
       acc.push(curr)
       return acc
     }, [])
@@ -36,6 +36,10 @@ const actions = {
   },
   dismissAllPosts ({ commit }) {
     commit('DISSMISS_ALL_POSTS')
+  },
+  viewPost ({ commit }, post) {
+    commit('SET_CURRENT_POST', post)
+    commit('SET_READ_POST', post.name)
   }
 }
 
@@ -54,6 +58,12 @@ const mutations = {
         return acc
       }, {})
     }
+  },
+  SET_CURRENT_POST (state, post) {
+    state.current = post
+  },
+  SET_READ_POST (state, postName) {
+    Vue.set(state.watched, postName, true)
   }
 }
 

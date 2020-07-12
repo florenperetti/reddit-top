@@ -1,8 +1,8 @@
 <template>
-  <article @click="$emit('view-post', post.name)" class="post">
+  <article @click="$emit('view-post', post)" class="post">
     <div class="post__content-wrapper">
       <div class="post__header">
-        <span class="post__icon-read"></span>
+        <span :class="!post.read ? 'post__icon-read' : 'post__icon-read post__icon-read--unread'"></span>
         <h2 class="post__author">{{ post.author }}</h2>
         <span class="post__date">{{ postDate }}</span>
       </div>
@@ -79,7 +79,7 @@ export default {
     margin-right: 8px;
 
     &--unread {
-      background-color: transparent;
+      background-color: transparent !important;
     }
   }
 

@@ -1,6 +1,8 @@
 import { fetchTopPosts } from '../../api/redditApi'
 import Vue from 'vue'
 
+const ampRegexp = /&amp;/g
+
 const state = {
   after: null,
   current: null,
@@ -28,10 +30,17 @@ const actions = {
       const response = await fetchTopPosts()
       commit('SET_ALL_POSTS', response.data.children.map(item => {
         // eslint-disable-next-line camelcase
-        const { title, thumbnail, author, name, num_comments, created_utc } = item.data
+        const { title, thumbnail, author, name, num_comments, created_utc, preview } = item.data
+        let image = ''
+
+        if (preview && preview.images && preview.images[0]) {
+          image = preview.images[0].source.url.replace(ampRegexp, '&')
+        }
+
         return {
           title,
           thumbnail,
+          image,
           author,
           name,
           num_comments,

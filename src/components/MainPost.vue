@@ -1,5 +1,6 @@
 <template>
-  <div id="main">
+  <div v-if="!currentPost">Swipe to open the menu!</div>
+  <div v-else id="main">
     <h1>{{currentPost.author}}</h1>
     <img v-if="currentPost.thumbnail" :src="currentPost.thumbnail">
     <h3>{{currentPost.title}}</h3>

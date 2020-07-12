@@ -2,7 +2,7 @@
   <article @click="$emit('view-post', post)" class="post">
     <div class="post__content-wrapper">
       <div class="post__header">
-        <span :class="!post.read ? 'post__icon-read' : 'post__icon-read post__icon-read--unread'"></span>
+        <span :class="[ 'post__icon-read', { 'post__icon-read--unread': post.read } ]"></span>
         <h2 class="post__author">{{ post.author }}</h2>
         <span class="post__date">{{ postDate }}</span>
       </div>

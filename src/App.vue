@@ -7,10 +7,6 @@
   >
     <aside class="drawer-content" slot="drawer">
       <Drawer
-        :posts="posts"
-        @dismiss-post="dismissPost"
-        @dismiss-all="dismissAllPosts"
-        @view-post="viewPost"
       />
     </aside>
     <main slot="content">
@@ -20,9 +16,9 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import Drawer from './components/Drawer'
 import MainPost from './components/MainPost'
-import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'App',
@@ -30,22 +26,13 @@ export default {
     Drawer,
     MainPost
   },
-  computed: {
-    ...mapGetters({
-      posts: 'posts/getPostsToShow'
-    })
-  },
   created () {
     this.fetchPosts()
   },
   methods: {
     ...mapActions({
-      fetchPosts: 'posts/fetchPosts',
-      dismissPost: 'posts/dismissPost',
-      dismissAllPosts: 'posts/dismissAllPosts'
-    }),
-    viewPost (name) {
-    }
+      fetchPosts: 'posts/fetchPosts'
+    })
   }
 }
 </script>

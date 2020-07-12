@@ -7,28 +7,37 @@
         class="list-item"
         :key="post.data.name"
         :post="post.data"
-        @dismiss-post="$emit('dismiss-post', $event)"
-        @view-post="$emit('view-post', $event)"
+        @dismiss-post="dismissPost"
+        @view-post="viewPost"
       />
     </transition-group>
     <div class="drawer__footer">
-      <button @click="$emit('dismiss-all')" class="drawer__dismiss-button">Dismiss All</button>
+      <button @click="dismissAllPosts" class="drawer__dismiss-button">Dismiss All</button>
     </div>
   </div>
 </template>
 
 <script>
 import Post from './Post'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'Drawer',
-  props: {
-    posts: {
-      type: Array
-    }
-  },
   components: {
     Post
+  },
+  computed: {
+    ...mapGetters({
+      posts: 'posts/getPostsToShow'
+    })
+  },
+  methods: {
+    ...mapActions({
+      dismissPost: 'posts/dismissPost',
+      dismissAllPosts: 'posts/dismissAllPosts'
+    }),
+    viewPost (name) {
+    }
   }
 }
 </script>

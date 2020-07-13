@@ -12,6 +12,10 @@ I didn't want to bloat the project with libraries like moment.js or lodash so I 
 
 Finally, I used vuex as state manager to centralize there the data and acomplish two things: use the library `vuex-persistedstate` to persist key data (posts read and dismissed) and to avoid passing too many events/data through components.
 
+## Demo
+
+http://reddit-top-reddit-top.apps.us-east-1.starter.openshift-online.com/
+
 ## Project setup
 ```
 npm install

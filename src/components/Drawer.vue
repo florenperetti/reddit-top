@@ -39,7 +39,10 @@ export default {
   computed: {
     ...mapGetters({
       posts: 'posts/getPostsToShow'
-    })
+    }),
+    postCount () {
+      return this.posts.length
+    }
   },
   methods: {
     ...mapActions({
@@ -58,6 +61,9 @@ export default {
         return
       }
       this.dismissPost(name)
+      if (this.postCount === 0) {
+        this.handleScrollEnd()
+      }
     },
     handleViewPost (post) {
       if (this.preventPostClick) {
